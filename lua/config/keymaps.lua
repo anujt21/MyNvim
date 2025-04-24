@@ -15,3 +15,50 @@ vim.keymap.set("i", "<A-l>", "<Right>", { desc = "Move right" })
 --   vim.lsp.buf.signature_help()
 -- end, { desc = "Signature help" })
 vim.keymap.set("n", "<leader>bC", "<cmd>BufferLinePickClose<CR>", { desc = "Pick & Close Buffer" })
+
+-- Keymapd for deleting without copying
+vim.keymap.set("n", "<leader>D", '"_d', { desc = "Delete without yanking" })
+
+-- Keymaps for replacing
+vim.keymap.set("n", "<leader>r", function()
+  vim.opt.operatorfunc = "v:lua.DeleteAndPaste"
+  return "g@"
+end, { expr = true, desc = "Delete (no yank) and paste previous yank" })
+
+_G.DeleteAndPaste = function(type)
+  local save_cursor = vim.fn.getcurpos()
+  if type == "char" then
+    vim.cmd([[normal! `[v`]"_d]])
+  elseif type == "line" then
+    vim.cmd([[normal! '[V']"_d]])
+  elseif type == "block" then
+    vim.cmd([[normal! `[<C-V>`]"_d]])
+  else
+    return
+  end
+  vim.cmd([[normal! P]])
+  vim.fn.setpos(".", save_cursor)
+end
+
+-- Harpoon keymaps
+-- local harpoon = require("harpoon")
+-- harpoon:setup()
+--
+-- vim.keymap.set("n", "<leader>a", function()
+--   harpoon:list():add()
+-- end)
+-- vim.keymap.set("n", "<C-e>", function()
+--   harpoon.ui.toggle_quick_menu(harpoon:list())
+-- end)
+-- vim.keymap.set("n", "<C-h>", function()
+--   harpoon:list():select(1)
+-- end)
+-- vim.keymap.set("n", "<C-j>", function()
+--   harpoon:list():select(2)
+-- end)
+-- vim.keymap.set("n", "<C-k>", function()
+--   harpoon:list():select(3)
+-- end)
+-- vim.keymap.set("n", "<C-l>", function()
+--   harpoon:list():select(4)
+-- end)
