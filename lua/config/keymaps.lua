@@ -16,8 +16,11 @@ vim.keymap.set("i", "<A-l>", "<Right>", { desc = "Move right" })
 -- end, { desc = "Signature help" })
 vim.keymap.set("n", "<leader>bC", "<cmd>BufferLinePickClose<CR>", { desc = "Pick & Close Buffer" })
 
--- Keymapd for deleting without copying
+-- Keymap for deleting without copying
 vim.keymap.set("n", "<leader>D", '"_d', { desc = "Delete without yanking" })
+
+-- Keymap for pasting
+vim.keymap.set("n", "<leader>p", 'o<ESC>"0P', { desc = "Paste in next line" })
 
 -- Keymaps for replacing
 vim.keymap.set("n", "<leader>r", function()
