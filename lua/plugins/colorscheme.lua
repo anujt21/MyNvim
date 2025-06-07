@@ -42,6 +42,7 @@ return {
 	},
 	{
 		"morhetz/gruvbox",
+    lazy = true,
 		priority = 800,
 		config = function()
 			require("at.highlights")
@@ -52,5 +53,8 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {},
+    config = function()
+        vim.cmd.colorscheme("tokyonight-night")
+    end,
 	},
 }
