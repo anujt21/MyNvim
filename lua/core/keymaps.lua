@@ -70,3 +70,6 @@ end
 
 vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+
+vim.api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
+vim.api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})

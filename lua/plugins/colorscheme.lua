@@ -3,58 +3,39 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		lazy = true,
-		priority = 1000,
-		opts = {
-			no_italic = true,
-			term_colors = true,
-			transparent_background = false,
-			styles = {
-				comments = {},
-				conditionals = {},
-				loops = {},
-				functions = {},
-				keywords = {},
-				strings = {},
-				variables = {},
-				numbers = {},
-				booleans = {},
-				properties = {},
-				types = {},
-			},
-			color_overrides = {
-				mocha = {
-					base = "#000000",
-					mantle = "#000000",
-					crust = "#000000",
-				},
-			},
-			integrations = {
-				telescope = {
-					enabled = true,
-					style = "nvchad",
-				},
-				dropbar = {
-					enabled = true,
-					color_mode = true,
-				},
-			},
-		},
+		priority = 900,
 	},
 	{
 		"morhetz/gruvbox",
-    lazy = true,
+		lazy = true,
 		priority = 800,
 		config = function()
+			vim.cmd.colorscheme("gruvbox")
 			require("at.highlights")
 		end,
 	},
 	{
 		"folke/tokyonight.nvim",
+		lazy = true,
+		priority = 700,
+		opts = {},
+		config = function()
+			vim.cmd.colorscheme("tokyonight-night")
+		end,
+	},
+	{
+		"EdenEast/nightfox.nvim",
 		lazy = false,
 		priority = 1000,
 		opts = {},
-    config = function()
-        vim.cmd.colorscheme("tokyonight-night")
-    end,
+		config = function()
+			vim.cmd.colorscheme("carbonfox")
+		end,
 	},
+  {
+  "loctvl842/monokai-pro.nvim",
+  config = function()
+      require("monokai-pro").setup()
+  end
+  },
 }
