@@ -2,7 +2,7 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-    lazy = true,
+		lazy = true,
 		priority = 1000,
 		opts = {
 			no_italic = true,
@@ -40,9 +40,17 @@ return {
 			},
 		},
 	},
-  {
-    "morhetz/gruvbox",
-    priority = 1000,
-    config = function() require "at.highlights" end,
-  },
+	{
+		"morhetz/gruvbox",
+		priority = 800,
+		config = function()
+			require("at.highlights")
+		end,
+	},
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	},
 }

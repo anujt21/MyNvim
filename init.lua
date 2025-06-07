@@ -7,64 +7,103 @@ require("core.telescope")
 require("core.autocmds")
 
 require("mason").setup({
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    }
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
+		},
+	},
 })
 
-require("catppuccin").setup {
-    integrations = {
-            cmp = true,
-            gitsigns = true,
-            nvimtree = true,
-            treesitter = true,
-            notify = false,
-            mini = {
-                enabled = true,
-                indentscope_color = "",
-            },
-        }
+require("ufo").setup()
 
-}
+require("catppuccin").setup({
+	integrations = {
+		cmp = true,
+		gitsigns = true,
+		nvimtree = true,
+		treesitter = true,
+		notify = false,
+		mini = {
+			enabled = true,
+			indentscope_color = "",
+		},
+	},
+})
 
-require("lualine").setup{
-    options = {theme = 'onelight'}
-}
+require("lualine").setup({
+	options = { theme = "dracula" },
+})
 -- LSP config
-require'lspconfig'.clangd.setup{}
+require("lspconfig").clangd.setup({})
 
 -- Set key mappings after lspconfig setup
 local on_attach = function(client, bufnr)
-  -- Go to definition
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
-  
-  -- Go to declaration
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { noremap = true, silent = true })
-  
-  -- Go to references
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
-  
-  -- Hover docs
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
-  
-  -- Rename symbol
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
-  
-  -- Signature help (optional)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sh', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap = true, silent = true })
+	-- Go to definition
+	vim.api.nvim_buf_set_keymap(
+		bufnr,
+		"n",
+		"gd",
+		"<Cmd>lua vim.lsp.buf.definition()<CR>",
+		{ noremap = true, silent = true }
+	)
+
+	-- Go to declaration
+	vim.api.nvim_buf_set_keymap(
+		bufnr,
+		"n",
+		"gD",
+		"<Cmd>lua vim.lsp.buf.declaration()<CR>",
+		{ noremap = true, silent = true }
+	)
+
+	-- Go to references
+	vim.api.nvim_buf_set_keymap(
+		bufnr,
+		"n",
+		"gr",
+		"<Cmd>lua vim.lsp.buf.references()<CR>",
+		{ noremap = true, silent = true }
+	)
+
+	-- Hover docs
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
+
+	-- Rename symbol
+	vim.api.nvim_buf_set_keymap(
+		bufnr,
+		"n",
+		"<leader>rn",
+		"<Cmd>lua vim.lsp.buf.rename()<CR>",
+		{ noremap = true, silent = true }
+	)
+
+	-- Signature help (optional)
+	vim.api.nvim_buf_set_keymap(
+		bufnr,
+		"n",
+		"<leader>sh",
+		"<Cmd>lua vim.lsp.buf.signature_help()<CR>",
+		{ noremap = true, silent = true }
+	)
 end
 
 -- Setup for C/C++ using clangd or ccls
-require("lspconfig").clangd.setup {
-  on_attach = on_attach,
-}
+require("lspconfig").clangd.setup({
+	on_attach = on_attach,
+})
 
 -- Bufferline plugin
-require("bufferline").setup{}
+require("bufferline").setup({})
 
 -- Trouble plugin
-require("trouble").setup{}
+require("trouble").setup({})
+
+require("nvim-treesitter.configs").setup({
+	ensure_installed = { "cpp", "c" }, -- Add more as needed
+	highlight = {
+		enable = true, -- THIS enables it by default
+		additional_vim_regex_highlighting = false,
+	},
+})
