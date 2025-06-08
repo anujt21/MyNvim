@@ -25,8 +25,8 @@ return {
 	},
 	{
 		"EdenEast/nightfox.nvim",
-		lazy = false,
-		priority = 1000,
+		lazy = true,
+		priority = 600,
 		opts = {},
 		config = function()
 			vim.cmd.colorscheme("carbonfox")
@@ -34,7 +34,10 @@ return {
 	},
   {
   "loctvl842/monokai-pro.nvim",
+		 lazy = false,
+		priority = 1000,
   config = function()
+      vim.cmd.colorscheme("monokai-pro-classic")
       require("monokai-pro").setup()
   end
   },
