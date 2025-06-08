@@ -1,6 +1,11 @@
 vim.g.mapleader = " "
 
 local keymap = vim.keymap.set
+
+-- Accelerate j and k
+vim.api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
+vim.api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
+
 keymap("n", "[d", vim.diagnostic.goto_prev)
 keymap("n", "]d", vim.diagnostic.goto_next)
 keymap("n", "<leader>q", vim.diagnostic.setloclist)
@@ -29,23 +34,23 @@ vim.keymap.set("n", ".n", function()
 	vim.wo.relativenumber = not vim.wo.relativenumber
 end, { desc = "Toggle relative line numbers" })
 
--- Map cntrl + h,j,k,l to left, down, up, right in insert mode
+-- Map alt + h,j,k,l to left, down, up, right in insert mode
 vim.keymap.set("i", "<A-h>", "<Left>", { desc = "Move left" })
 vim.keymap.set("i", "<A-j>", "<Down>", { desc = "Move down" })
 vim.keymap.set("i", "<A-k>", "<Up>", { desc = "Move up" })
 vim.keymap.set("i", "<A-l>", "<Right>", { desc = "Move right" })
 vim.keymap.set("i", "<C-a>", "<C-o>A", { desc = "Endline insert" })
--- Change buffer
+
+-- Change/delete buffer
 vim.keymap.set("n", "H", ":bprevious<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "L", ":bnext<CR>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>bC", "<cmd>BufferLinePickClose<CR>", { desc = "Pick & Close Buffer" })
+vim.keymap.set("n", "<leader>bb", "<cmd>BufferLinePickClose<CR>", { desc = "Pick & Close Buffer" })
 
 -- Keymap for deleting without copying
 vim.keymap.set("n", "<leader>D", '"_d', { desc = "Delete without yanking" })
 
 -- Keymap for pasting
-vim.keymap.set("n", "<leader>p", 'o<ESC>"0P', { desc = "Paste in next line" })
+vim.keymap.set("n", "<leader>p", "o<ESC>P", { desc = "Paste in next line" })
 
 -- Keymaps for replacing
 vim.keymap.set("n", "<leader>r", function()
@@ -71,5 +76,34 @@ end
 vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 
-vim.api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
-vim.api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
+-- Harpoon setup
+local harpoon = require("harpoon")
+
+-- REQUIRED
+vim.keymap.set("n", "<leader>a", function()
+	harpoon:list():add()
+end)
+vim.keymap.set("n", "<C-e>", function()
+	harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
+
+vim.keymap.set("n", "<leader>1", function()
+	harpoon:list():select(1)
+end)
+vim.keymap.set("n", "<leader>2", function()
+	harpoon:list():select(2)
+end)
+vim.keymap.set("n", "<leader>3", function()
+	harpoon:list():select(3)
+end)
+vim.keymap.set("n", "<leader>4", function()
+	harpoon:list():select(4)
+end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-s-p>", function()
+	harpoon:list():prev()
+end)
+vim.keymap.set("n", "<C-s-n", function()
+	harpoon:list():next()
+end)
