@@ -1,8 +1,7 @@
--- TODO: resolve clone error with plenary
--- return {
---   {
---     "ThePrimeagen/harpoon",
---     branch = "harpoon2",
---     dependencies = { "nvim-lua.plenary.nvim" },
---   },
--- }
+return {
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+}
