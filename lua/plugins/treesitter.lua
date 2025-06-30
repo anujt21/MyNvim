@@ -29,8 +29,25 @@ return {
 				"yaml",
 				"markdown",
 			},
+      textobjects = {
+        select = {
+          enable = true,
+          keymaps = {
+            ["af"] = "@function.outer", -- Around function (vaf/yaf)
+            ["if"] = "@function.inner", -- Inside function (vif/yif)
+            -- Other useful text objects:
+            ["ac"] = "@class.outer",   -- Around class (vac/yac)
+            ["ic"] = "@class.inner",    -- Inside class (vic/yic)
+          },
+        },
+      },
 			matchup = { enable = true },
 			auto_install = true,
 		},
 	},
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    lazy = true,
+  },
 }

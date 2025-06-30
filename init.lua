@@ -56,7 +56,6 @@ require("lualine").setup({
 })
 
 -- LSP config
-require("lspconfig").clangd.setup({})
 
 -- Set key mappings after lspconfig setup
 local on_attach = function(client, bufnr)
@@ -111,7 +110,26 @@ end
 
 -- Setup for C/C++ using clangd or ccls
 require("lspconfig").clangd.setup({
-	on_attach = on_attach,
+  cmd = {
+    "clangd",
+    "--query-driver=/opt/nxp-real-time-edge/2.8/environment-setup-armv8a-poky-linux", 
+    "--background-index",
+    "--clang-tidy",
+    "--header-insertion=never",
+    "--offset-encoding=utf-16",
+    "--limit-references=0",
+    "--limit-results=0",
+    "--completion-style=detailed",
+    "--fallback-style=llvm",
+    "--suggest-missing-includes",
+  },
+  init_options = {
+    fallbackFlags = {
+      "-Wno-unknown-argument",
+      "--gcc-toolchain=/opt/nxp-real-time-edge/2.8/environment-setup-armv8a-poky-linux", 
+    },
+  },
+  on_attach = on_attach,
 })
 
 -- Bufferline plugin

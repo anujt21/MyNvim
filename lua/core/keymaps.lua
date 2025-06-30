@@ -24,6 +24,7 @@ keymap("n", "<leader>fh", function()
 	require("telescope.builtin").help_tags()
 end)
 
+-- Nvim Tree
 vim.keymap.set("n", "<leader>E", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 
 -- Numbering
@@ -39,7 +40,9 @@ vim.keymap.set("i", "<A-h>", "<Left>", { desc = "Move left" })
 vim.keymap.set("i", "<A-j>", "<Down>", { desc = "Move down" })
 vim.keymap.set("i", "<A-k>", "<Up>", { desc = "Move up" })
 vim.keymap.set("i", "<A-l>", "<Right>", { desc = "Move right" })
-vim.keymap.set("i", "<C-a>", "<C-o>A", { desc = "Endline insert" })
+
+-- Endline insert in insert mode
+vim.keymap.set("i", "<A-a>", "<C-o>A", { desc = "Endline insert" })
 
 -- Change/delete buffer
 vim.keymap.set("n", "H", ":bprevious<CR>", { noremap = true, silent = true })
@@ -58,6 +61,7 @@ vim.keymap.set("n", "<leader>r", function()
 	return "g@"
 end, { expr = true, desc = "Delete (no yank) and paste previous yank" })
 
+-- Replace function
 _G.DeleteAndPaste = function(type)
 	local save_cursor = vim.fn.getcurpos()
 	if type == "char" then
