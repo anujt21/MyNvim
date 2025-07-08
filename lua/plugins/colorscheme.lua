@@ -4,6 +4,9 @@ return {
     name = "catppuccin",
     lazy = true,
     priority = 900,
+    config = function()
+      vim.cmd.colorscheme("catppuccin-mocha")
+    end,
   },
   {
     "morhetz/gruvbox",

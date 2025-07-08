@@ -14,4 +14,4 @@ vim.o.foldenable = true
 vim.api.nvim_set_hl(0, "SnacksPickerGitStatusUntracked", { fg = "#a6e22e", bold = true })
 
 -- Set any default colorscheme
-vim.cmd.colorscheme("industry")
+-- vim.cmd.colorscheme("industry")
