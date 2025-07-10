@@ -3,7 +3,7 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = true,
-    priority = 900,
+    priority = 700,
     config = function()
       vim.cmd.colorscheme("catppuccin-mocha")
     end,
@@ -11,7 +11,7 @@ return {
   {
     "morhetz/gruvbox",
     lazy = true,
-    priority = 800,
+    priority = 600,
     config = function()
       vim.cmd.colorscheme("gruvbox")
       require("at.highlights")
@@ -19,8 +19,8 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    lazy = true,
-    priority = 700,
+    lazy = false,
+    priority = 800,
     opts = {},
     config = function()
       vim.cmd.colorscheme("tokyonight-night")
@@ -28,8 +28,8 @@ return {
   },
   {
     "EdenEast/nightfox.nvim",
-    lazy = true,
-    priority = 600,
+    lazy = false,
+    priority = 900,
     opts = {},
     config = function()
       vim.cmd.colorscheme("carbonfox")
@@ -37,8 +37,8 @@ return {
   },
   {
     "loctvl842/monokai-pro.nvim",
-    lazy = true,
-    priority = 500,
+    lazy = false,
+    priority = 1000,
     config = function()
       vim.cmd.colorscheme("monokai-pro-classic")
       require("monokai-pro").setup()

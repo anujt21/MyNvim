@@ -37,19 +37,19 @@ require("noice").setup({
 
 require("ufo").setup()
 
-require("catppuccin").setup({
-	integrations = {
-		cmp = true,
-		gitsigns = true,
-		nvimtree = true,
-		treesitter = true,
-		notify = false,
-		mini = {
-			enabled = true,
-			indentscope_color = "",
-		},
-	},
-})
+-- require("catppuccin").setup({
+-- 	integrations = {
+-- 		cmp = true,
+-- 		gitsigns = true,
+-- 		nvimtree = true,
+-- 		treesitter = true,
+-- 		notify = false,
+-- 		mini = {
+-- 			enabled = true,
+-- 			indentscope_color = "",
+-- 		},
+-- 	},
+-- })
 
 require("lualine").setup({
 	options = { theme = "dracula" },
@@ -112,7 +112,7 @@ end
 require("lspconfig").clangd.setup({
   cmd = {
     "clangd",
-    "--query-driver=/opt/nxp-real-time-edge/2.8/environment-setup-armv8a-poky-linux", 
+    "--compile-commands-dir=.",
     "--background-index",
     "--clang-tidy",
     "--header-insertion=never",
