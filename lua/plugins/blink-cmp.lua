@@ -1,3 +1,5 @@
+-- For typo resistance
+
 return {
   'saghen/blink.cmp',
   enabled = true,

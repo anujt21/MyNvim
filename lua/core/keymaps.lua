@@ -1,113 +1,59 @@
-vim.g.mapleader = " "
+-- Key mappings
+vim.g.mapleader = " "                              -- Set leader key to space
+vim.g.maplocalleader = " "                         -- Set local leader key (NEW)
 
-local keymap = vim.keymap.set
+-- Normal mode mappings
+vim.keymap.set("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 
--- Accelerate j and k
-vim.api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
-vim.api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
+-- Center screen when jumping
+vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 
-keymap("n", "[d", vim.diagnostic.goto_prev)
-keymap("n", "]d", vim.diagnostic.goto_next)
-keymap("n", "<leader>q", vim.diagnostic.setloclist)
+-- Delete without yanking
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
 
--- Telescope keymaps (lazy-loaded)
-keymap("n", "<leader><leader>", function()
-	require("telescope.builtin").find_files()
-end)
-keymap("n", "<leader>fg", function()
-	require("telescope.builtin").live_grep()
-end)
-keymap("n", "<leader>fb", function()
-	require("telescope.builtin").buffers()
-end)
-keymap("n", "<leader>fh", function()
-	require("telescope.builtin").help_tags()
-end)
+-- Buffer navigation
+vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
 
--- Nvim Tree
-vim.keymap.set("n", "<leader>E", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+-- Better window navigation
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to top window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 
--- Numbering
-vim.keymap.set("n", ",n", function()
-	vim.wo.number = not vim.wo.number
-end, { desc = "Toggle line numbers" })
-vim.keymap.set("n", ".n", function()
-	vim.wo.relativenumber = not vim.wo.relativenumber
-end, { desc = "Toggle relative line numbers" })
+-- Splitting & Resizing
+vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split window vertically" })
+vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split window horizontally" })
+vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", { desc = "Increase window height" })
+vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", { desc = "Decrease window height" })
+vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Decrease window width" })
+vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Increase window width" })
 
--- Map alt + h,j,k,l to left, down, up, right in insert mode
-vim.keymap.set("i", "<A-h>", "<Left>", { desc = "Move left" })
-vim.keymap.set("i", "<A-j>", "<Down>", { desc = "Move down" })
-vim.keymap.set("i", "<A-k>", "<Up>", { desc = "Move up" })
-vim.keymap.set("i", "<A-l>", "<Right>", { desc = "Move right" })
+-- Move lines up/down
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
--- Endline insert in insert mode
-vim.keymap.set("i", "<A-a>", "<C-o>A", { desc = "Endline insert" })
+-- Better indenting in visual mode
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
--- Change/delete buffer
-vim.keymap.set("n", "H", ":bprevious<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "L", ":bnext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>bb", "<cmd>BufferLinePickClose<CR>", { desc = "Pick & Close Buffer" })
+-- Quick file navigation
+vim.keymap.set("n", "<leader>e", ":Explore<CR>", { desc = "Open file explorer" })
+vim.keymap.set("n", "<leader>ff", ":find ", { desc = "Find file" })
 
--- Keymap for deleting without copying
-vim.keymap.set("n", "<leader>D", '"_d', { desc = "Delete without yanking" })
+-- Better J behavior
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 
--- Keymap for pasting
-vim.keymap.set("n", "<leader>p", "o<ESC>P", { desc = "Paste in next line" })
+-- Quick config editing
+vim.keymap.set("n", "<leader>rc", ":e ~/.config/nvim/init.lua<CR>", { desc = "Edit config" })
 
--- Keymaps for replacing
-vim.keymap.set("n", "<leader>r", function()
-	vim.opt.operatorfunc = "v:lua.DeleteAndPaste"
-	return "g@"
-end, { expr = true, desc = "Delete (no yank) and paste previous yank" })
+-- Search keymaps
+vim.keymap.set("n", "<leader>sk", function()
+  require("keymap_search").show()
+end, { desc = "Search Custom Keymaps" })
 
--- Replace function
-_G.DeleteAndPaste = function(type)
-	local save_cursor = vim.fn.getcurpos()
-	if type == "char" then
-		vim.cmd([[normal! `[v`]"_d]])
-	elseif type == "line" then
-		vim.cmd([[normal! '[V']"_d]])
-	elseif type == "block" then
-		vim.cmd([[normal! `[<C-V>`]"_d]])
-	else
-		return
-	end
-	vim.cmd([[normal! P]])
-	vim.fn.setpos(".", save_cursor)
-end
-
-vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-
--- Harpoon setup
-local harpoon = require("harpoon")
-
--- REQUIRED
-vim.keymap.set("n", "<leader>a", function()
-	harpoon:list():add()
-end)
-vim.keymap.set("n", "<C-e>", function()
-	harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
-
-vim.keymap.set("n", "<leader>1", function()
-	harpoon:list():select(1)
-end)
-vim.keymap.set("n", "<leader>2", function()
-	harpoon:list():select(2)
-end)
-vim.keymap.set("n", "<leader>3", function()
-	harpoon:list():select(3)
-end)
-vim.keymap.set("n", "<leader>4", function()
-	harpoon:list():select(4)
-end)
-
--- Toggle previous & next buffers stored within Harpoon list
-vim.keymap.set("n", "<C-s-p>", function()
-	harpoon:list():prev()
-end)
-vim.keymap.set("n", "<C-s-n", function()
-	harpoon:list():next()
-end)

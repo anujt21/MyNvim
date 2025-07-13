@@ -1,3 +1,5 @@
+-- Better looking cmdline and messages popup
+
 return {
 	{
 		"folke/noice.nvim",

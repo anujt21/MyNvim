@@ -9,15 +9,6 @@ return {
     end,
   },
   {
-    "morhetz/gruvbox",
-    lazy = true,
-    priority = 600,
-    config = function()
-      vim.cmd.colorscheme("gruvbox")
-      require("at.highlights")
-    end,
-  },
-  {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 800,
