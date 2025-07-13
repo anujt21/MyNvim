@@ -66,10 +66,22 @@ return {
 				c = { "clang_format" },
 				lua = { "stylua" },
 			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
+			format_on_save = false,
+      format_after_save = false,
 		},
+	},
+	{
+		"nvimtools/none-ls.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			local null_ls = require("null-ls")
+
+			null_ls.setup({
+				sources = {
+					null_ls.builtins.formatting.stylua,
+				},
+			})
+		end,
 	},
 }

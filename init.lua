@@ -59,6 +59,10 @@ require("lualine").setup({
 
 -- Set key mappings after lspconfig setup
 local on_attach = function(client, bufnr)
+
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
+
 	-- Go to definition
 	vim.api.nvim_buf_set_keymap(
 		bufnr,
