@@ -73,7 +73,7 @@ vim.opt.guicursor = "n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700
 
 -- Folding settings
 vim.opt.foldmethod = "expr"                             -- Use expression for folding
-vim.wo.vim.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folding
+--vim.wo.vim.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folding
 vim.opt.foldlevel = 99                                  -- Start with all folds open
 
 -- Split behavior
