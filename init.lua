@@ -136,6 +136,23 @@ require("lspconfig").clangd.setup({
   on_attach = on_attach,
 })
 
+-- Python LSP (pylsp)
+require("lspconfig").pylsp.setup{
+  capabilities = capabilities,
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {enabled = false},
+        mccabe = {enabled = false},
+        pyflakes = {enabled = false},
+        pylsp_mypy = {enabled = true},
+        pylsp_black = {enabled = true},
+        pylsp_isort = {enabled = true},
+      }
+    }
+  }
+}
+
 -- Bufferline plugin
 require("bufferline").setup({})
 
