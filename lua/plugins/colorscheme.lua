@@ -38,7 +38,7 @@ return {
   {
     "loctvl842/monokai-pro.nvim",
     lazy = false,
-    priority = 1000,
+    priority = 900,
     config = function()
       vim.cmd.colorscheme("monokai-pro-classic")
       require("monokai-pro").setup()
@@ -46,5 +46,13 @@ return {
   },
 	{
 		"rktjmp/lush.nvim",
+	},
+	{
+		"rebelot/kanagawa.nvim",
+		lazy = false,
+		priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("kanagawa")
+    end,
 	},
 }

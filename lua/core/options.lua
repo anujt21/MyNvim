@@ -15,4 +15,4 @@ vim.api.nvim_set_hl(0, "SnacksPickerGitStatusUntracked", { fg = "#a6e22e", bold 
 
 -- Set any default colorscheme
 -- vim.cmd.colorscheme("carbonfox")
-vim.cmd.colorscheme("monokai-pro-classic")
+vim.cmd.colorscheme("kanagawa")
