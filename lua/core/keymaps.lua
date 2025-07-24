@@ -40,6 +40,10 @@ vim.keymap.set("i", "<A-h>", "<Left>", { desc = "Move left" })
 vim.keymap.set("i", "<A-j>", "<Down>", { desc = "Move down" })
 vim.keymap.set("i", "<A-k>", "<Up>", { desc = "Move up" })
 vim.keymap.set("i", "<A-l>", "<Right>", { desc = "Move right" })
+vim.keymap.set("i", "<C-7>", "<Left>", { desc = "Move left" })
+vim.keymap.set("i", "<C-8>", "<Down>", { desc = "Move down" })
+vim.keymap.set("i", "<C-9>", "<Up>", { desc = "Move up" })
+vim.keymap.set("i", "<C-0>", "<Right>", { desc = "Move right" })
 
 -- Endline insert in insert mode
 vim.keymap.set("i", "<A-a>", "<C-o>A", { desc = "Endline insert" })
@@ -50,7 +54,7 @@ vim.keymap.set("n", "L", ":bnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>bb", "<cmd>BufferLinePickClose<CR>", { desc = "Pick & Close Buffer" })
 
 -- Keymap for deleting without copying
-vim.keymap.set("n", "<leader>D", '"_d', { desc = "Delete without yanking" })
+vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete without yanking" })
 
 -- Keymap for pasting
 vim.keymap.set("n", "<leader>p", "o<ESC>P", { desc = "Paste in next line" })
