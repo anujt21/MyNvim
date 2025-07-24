@@ -44,4 +44,7 @@ return {
       require("monokai-pro").setup()
     end
   },
+	{
+		"rktjmp/lush.nvim",
+	},
 }
