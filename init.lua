@@ -37,20 +37,6 @@ require("noice").setup({
 
 require("ufo").setup()
 
--- require("catppuccin").setup({
--- 	integrations = {
--- 		cmp = true,
--- 		gitsigns = true,
--- 		nvimtree = true,
--- 		treesitter = true,
--- 		notify = false,
--- 		mini = {
--- 			enabled = true,
--- 			indentscope_color = "",
--- 		},
--- 	},
--- })
-
 require("lualine").setup({
 	options = { theme = "dracula" },
 })
@@ -60,8 +46,8 @@ require("lualine").setup({
 -- Set key mappings after lspconfig setup
 local on_attach = function(client, bufnr)
 
-  client.server_capabilities.documentFormattingProvider = false
-  client.server_capabilities.documentRangeFormattingProvider = false
+	client.server_capabilities.documentFormattingProvider = false
+	client.server_capabilities.documentRangeFormattingProvider = false
 
 	-- Go to definition
 	vim.api.nvim_buf_set_keymap(
@@ -114,44 +100,67 @@ end
 
 -- Setup for C/C++ using clangd or ccls
 require("lspconfig").clangd.setup({
-  cmd = {
-    "clangd",
-    "--compile-commands-dir=.",
-    "--background-index",
-    "--clang-tidy",
-    "--header-insertion=never",
-    "--offset-encoding=utf-16",
-    "--limit-references=0",
-    "--limit-results=0",
-    "--completion-style=detailed",
-    "--fallback-style=llvm",
-    "--suggest-missing-includes",
-  },
-  init_options = {
-    fallbackFlags = {
-      "-Wno-unknown-argument",
-      "--gcc-toolchain=/opt/nxp-real-time-edge/2.8/environment-setup-armv8a-poky-linux", 
-    },
-  },
-  on_attach = on_attach,
+	cmd = {
+		"clangd",
+		"--compile-commands-dir=.",
+		"--background-index",
+		"--clang-tidy",
+		"--header-insertion=never",
+		"--offset-encoding=utf-16",
+		"--limit-references=0",
+		"--limit-results=0",
+		"--completion-style=detailed",
+		"--fallback-style=llvm",
+		"--suggest-missing-includes",
+	},
+	init_options = {
+		fallbackFlags = {
+			"-Wno-unknown-argument",
+			"--gcc-toolchain=/opt/nxp-real-time-edge/2.8/environment-setup-armv8a-poky-linux", 
+		},
+	},
+	on_attach = on_attach,
 })
 
 -- Python LSP (pylsp)
 require("lspconfig").pylsp.setup{
-  capabilities = capabilities,
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {enabled = false},
-        mccabe = {enabled = false},
-        pyflakes = {enabled = false},
-        pylsp_mypy = {enabled = true},
-        pylsp_black = {enabled = true},
-        pylsp_isort = {enabled = true},
-      }
-    }
-  }
+	capabilities = capabilities,
+	settings = {
+		pylsp = {
+			plugins = {
+				pycodestyle = {enabled = false},
+				mccabe = {enabled = false},
+				pyflakes = {enabled = false},
+				pylsp_mypy = {enabled = true},
+				pylsp_black = {enabled = true},
+				pylsp_isort = {enabled = true},
+			}
+		}
+	}
 }
+
+-- Rust LSP
+require("lspconfig").rust_analyzer.setup({
+	settings = {
+		["rust-analyzer"] = {
+			cargo = { allFeatures = true },
+			checkOnSave = {
+				command = "clippy"
+			},
+		},
+	},
+})
+
+-- Rust tools
+require('rust-tools').setup({
+	server = {
+		on_attach = function(_, bufnr)
+			local opts = { noremap=true, silent=true, buffer=bufnr }
+			vim.keymap.set("n", "<leader>rh", "<cmd>RustHoverActions<CR>", opts)
+			vim.keymap.set("n", "<leader>rr", "<cmd>RustRunnables<CR>", opts)
+		end,
+	},
+})
 
 -- Bufferline plugin
 require("bufferline").setup({})

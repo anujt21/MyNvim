@@ -13,4 +13,5 @@ return {
 			-- Your setup opts here
 		},
 	},
+	"simrat39/rust-tools.nvim",
 }
