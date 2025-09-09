@@ -112,6 +112,7 @@ require("lspconfig").clangd.setup({
 		"--completion-style=detailed",
 		"--fallback-style=llvm",
 		"--suggest-missing-includes",
+		"--log=error"
 	},
 	init_options = {
 		fallbackFlags = {
