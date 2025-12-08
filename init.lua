@@ -98,8 +98,14 @@ local on_attach = function(client, bufnr)
 	)
 end
 
+-- set global defaults merged into every server
+vim.lsp.config('*', {
+	on_attach = on_attach,
+	capabilities = capabilities,   -- use your existing 'capabilities' variable
+})
+
 -- Setup for C/C++ using clangd or ccls
-require("lspconfig").clangd.setup({
+vim.lsp.config("clangd",{
 	cmd = {
 		"clangd",
 		"--compile-commands-dir=.",
@@ -120,12 +126,10 @@ require("lspconfig").clangd.setup({
 			"--gcc-toolchain=/opt/nxp-real-time-edge/2.8/environment-setup-armv8a-poky-linux", 
 		},
 	},
-	on_attach = on_attach,
 })
 
 -- Python LSP (pylsp)
-require("lspconfig").pylsp.setup{
-	capabilities = capabilities,
+vim.lsp.config("pylsp",{
 	settings = {
 		pylsp = {
 			plugins = {
@@ -138,10 +142,10 @@ require("lspconfig").pylsp.setup{
 			}
 		}
 	}
-}
+})
 
 -- Rust LSP
-require("lspconfig").rust_analyzer.setup({
+vim.lsp.config("rust-analyzer",{
 	settings = {
 		["rust-analyzer"] = {
 			cargo = { allFeatures = true },
@@ -151,6 +155,10 @@ require("lspconfig").rust_analyzer.setup({
 		},
 	},
 })
+
+vim.lsp.enable("clangd")
+vim.lsp.enable("pylsp")
+vim.lsp.enable("rust-analyzer")
 
 -- Rust tools
 require('rust-tools').setup({
