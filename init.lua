@@ -6,16 +6,7 @@ require("core.keymaps")
 require("core.telescope")
 require("core.autocmds")
 
-require("mason").setup({
-	ui = {
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗",
-		},
-	},
-})
-
+-- Some plugins setup
 require("noice").setup({
 	lsp = {
 		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -42,6 +33,16 @@ require("lualine").setup({
 })
 
 -- LSP config
+
+require("mason").setup({
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
+		},
+	},
+})
 
 -- Set key mappings after lspconfig setup
 local on_attach = function(client, bufnr)
@@ -185,7 +186,22 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
-
-
--- REQUIRED
+-- Harpoon
 require("harpoon").setup({})
+
+-- Custom commands
+
+vim.api.nvim_create_user_command("CFormatKernel", function()
+  vim.opt.expandtab = false
+  vim.opt.shiftwidth = 8
+  vim.opt.tabstop = 8
+  vim.cmd("normal! gg=G")
+end, {})
+
+vim.api.nvim_create_user_command("CFormatApplication", function()
+  vim.opt.expandtab = true
+  vim.opt.shiftwidth = 4
+  vim.opt.tabstop = 4
+  vim.cmd("normal! gg=G")
+end, {})
+
