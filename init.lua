@@ -130,7 +130,9 @@ vim.lsp.config("clangd",{
 })
 
 -- Python LSP (pylsp)
-vim.lsp.config("pylsp",{
+require("lspconfig").pylsp.setup({
+	cmd = { vim.fn.expand("~") .. "/webdev/bin/pylsp" },
+	capabilities = capabilities,
 	settings = {
 		pylsp = {
 			plugins = {
